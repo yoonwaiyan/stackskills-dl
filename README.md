@@ -1,5 +1,8 @@
 This is a **non-official** Ruby script to download all StackSkills tutorials.
 
+## Under development
+This is just a rough script without proper handling.
+
 ## Usage
 This script requires Mechanize gem to run.
 ```ruby
