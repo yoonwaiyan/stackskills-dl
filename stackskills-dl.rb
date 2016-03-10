@@ -25,8 +25,6 @@ form['user[email]'] = input[:email]
 form['user[password]'] = input[:password]
 page = form.submit
 user_dashboard = page.link_with(:href => /courses\/enrolled/)
-p "USER DASHBOARD:"
-p user_dashboard
 if user_dashboard
 	dashboard_page = user_dashboard.click
 	courses = dashboard_page.links_with(href: /courses\/(?!enrolled)/)
@@ -34,9 +32,6 @@ if user_dashboard
 		if input[:course]
 			puts "Evaluating the course"
 			course_href = input[:course].split("/courses/").last
-			p "FINDING COURSE: "
-			p course_href
-			p dashboard_page
 			course_link = dashboard_page.link_with(href: Regexp.new("#{course_href}"))
 			if course_link
 				folder_name = escape_chars(course_link.text.strip.split("\n").first)
