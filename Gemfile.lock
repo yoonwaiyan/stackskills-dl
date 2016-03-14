@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    ast (2.2.0)
     domain_name (0.5.20160309)
       unf (>= 0.0.5, < 1.0.0)
     highline (1.7.8)
@@ -22,9 +23,21 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     ntlm-http (0.1.1)
+    parser (2.3.0.6)
+      ast (~> 2.2)
+    powerpack (0.1.1)
+    rainbow (2.1.0)
+    rubocop (0.38.0)
+      parser (>= 2.3.0.6, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
+    ruby-progressbar (1.7.5)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    unicode-display_width (1.0.2)
     webrobots (0.1.2)
 
 PLATFORMS
@@ -33,6 +46,7 @@ PLATFORMS
 DEPENDENCIES
   highline
   mechanize
+  rubocop (~> 0.38.0)
 
 BUNDLED WITH
    1.11.2
