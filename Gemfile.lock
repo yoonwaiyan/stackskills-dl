@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.2.0)
+    coderay (1.1.1)
     domain_name (0.5.20160309)
       unf (>= 0.0.5, < 1.0.0)
     highline (1.7.8)
@@ -16,6 +17,7 @@ GEM
       nokogiri (~> 1.6)
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (>= 0.0.9, < 0.2)
+    method_source (0.8.2)
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
     net-http-digest_auth (1.4)
@@ -26,6 +28,10 @@ GEM
     parser (2.3.0.6)
       ast (~> 2.2)
     powerpack (0.1.1)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rainbow (2.1.0)
     rubocop (0.38.0)
       parser (>= 2.3.0.6, < 3.0)
@@ -34,6 +40,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.7.5)
+    slop (3.6.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
@@ -46,6 +53,7 @@ PLATFORMS
 DEPENDENCIES
   highline
   mechanize
+  pry
   rubocop (~> 0.38.0)
 
 BUNDLED WITH
