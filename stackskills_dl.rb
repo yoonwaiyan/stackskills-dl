@@ -8,7 +8,7 @@ def escape_chars(str)
 end
 
 def mkchdir(dir)
-  Dir.mkdir(dir) unless Dir.exist?(dir)
+  system 'mkdir', '-p', dir
   Dir.chdir(dir) do
     yield
   end
