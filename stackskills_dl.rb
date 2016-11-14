@@ -73,7 +73,7 @@ if user_dashboard
   courses = dashboard_page.links_with(href: %r{courses/(?!enrolled)})
   puts 'No course available to download.' if courses.count <= 0
   if input[:course]
-    course_link = find_course(input[:course])
+    course_link = find_course(input[:course], dashboard_page)
     if course_link
       puts "Downloading only one course: #{folder_name}"
       download_videos(course_link)
