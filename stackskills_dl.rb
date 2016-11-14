@@ -44,7 +44,7 @@ def download_videos(course_link)
   end
 end
 
-def find_course(course_name)
+def find_course(course_name, dashboard_page)
   puts "Finding #{course_name} from your list of courses"
   course_href = course_name.split('/courses/').last
   dashboard_page.link_with(href: Regexp.new(course_href.to_s))
