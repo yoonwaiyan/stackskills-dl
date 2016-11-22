@@ -16,7 +16,11 @@ end
 
 def download_video(page, lecture_name)
   video = page.link_with(href: /.mp4/)
-  `wget #{video.href} -c -O #{lecture_name}.mp4` if video
+  if video
+    `wget #{video.href} -c -O #{lecture_name}.mp4`
+  else
+    puts "Sorry, this lecture is not available to download."
+  end
 end
 
 def download_pdf(page)
@@ -75,7 +79,7 @@ if user_dashboard
   if input[:course]
     course_link = find_course(input[:course], dashboard_page)
     if course_link
-      puts "Downloading only one course: #{folder_name}"
+      puts "Downloading only one course: #{input[:course]}"
       download_videos(course_link)
     else
       puts "Couldn't find this course: #{input[:course]}"
