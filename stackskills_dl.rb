@@ -15,7 +15,7 @@ def mkchdir(dir)
 end
 
 def download_video(page, lecture_name)
-  video = page.link_with(href: /.mp4/)
+  video = page.link_with(href: /filepicker.io/)
   if video
     `wget #{video.href} -c -O #{lecture_name}.mp4`
   else
