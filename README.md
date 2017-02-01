@@ -6,6 +6,9 @@ This script requires Mechanize gem to run.
 bundle install
 ```
 
+wget is required to download attached videos and PDFs.
+youtube-dl is required to download Wistia videos.
+
 To use this script, simply exec this script:
 ```ruby
 ruby stackskills_dl.rb
