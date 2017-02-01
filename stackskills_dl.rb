@@ -19,7 +19,15 @@ def download_video(page, lecture_name)
   if video
     `wget #{video.href} -c -O #{lecture_name}.mp4`
   else
-    puts "Sorry, this lecture is not available to download."
+    # try wistia videos
+    wistia_div = page.search('div.attachment-wistia-player')
+    if wistia_div && wistia_div.count == 1
+      video_id = wistia_div.first.attributes["data-wistia-id"].value
+      video_url = "https://fast.wistia.net/embed/iframe/#{video_id}"
+      puts `youtube-dl --restrict-filenames #{video_url}`
+    else
+      puts "Sorry, this lecture is not available to download."
+    end
   end
 end
 
