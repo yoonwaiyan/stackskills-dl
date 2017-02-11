@@ -2,7 +2,7 @@ class Utilities
   class << self
 
     def escape_chars(string)
-      string.tr('(', '-').tr(')', '-').tr(' ', '_')
+      string.tr('(', '-').tr(')', '-').tr(' ', '_').tr("\\", "-").tr("/", "-").tr(":", "-").tr("*", "-").tr("?", "-").tr("<", "-").tr(">", "-").tr("|", "-").tr("\"", "-").tr("&", "and")
     end
 
     def mkchdir(dir)
