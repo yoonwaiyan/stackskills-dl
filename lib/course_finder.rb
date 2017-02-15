@@ -67,6 +67,9 @@ class CourseFinder
     pdf = lecture_page.link_with(href: /.pdf/)
     lecture.add_pdf(pdf) if pdf
 
+    zipf = lecture_page.link_with(href: /.zip/)
+    lecture.add_zip(zipf) if zipf
+
     lecture
   end
 

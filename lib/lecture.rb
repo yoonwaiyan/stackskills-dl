@@ -1,6 +1,6 @@
 class Lecture
 
-  attr_accessor :name, :video_url, :video_type, :pdf, :index
+  attr_accessor :name, :video_url, :video_type, :pdf, :zipf, :index
 
   def initialize(args = {})
     @name  = args.fetch(:name)
@@ -23,11 +23,16 @@ class Lecture
     self.pdf = pdf_url
   end
 
+  def add_zip(zip_url)
+    self.zipf = zip_url
+  end
+
   def download
     puts "Downloading #{name}"
-    Utilities.mkchdir("#{index}. #{name}") do
+    Utilities.mkchdir("%02d" % index + ". #{name}") do
       download_video
       download_pdf
+      download_zip
     end
   end
 
@@ -52,4 +57,8 @@ class Lecture
     `wget #{pdf.href} -c -O #{pdf.text.split(' ').first}`
   end
 
+  def download_zip
+    return nil unless zipf
+    `wget #{zipf.href} -c -O #{zipf.text.split(' ').first}`
+  end
 end
