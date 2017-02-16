@@ -2,7 +2,7 @@ This is a **non-official** Ruby script to download all StackSkills tutorials. Lo
 
 ## Usage
 **Important!!**
-- Please download wget to download attached files(videos, PDFs and zipped files).
+- Please install wget to download attached files(videos, PDFs and zipped files).
 - For Wistia videos, please install [youtube-dl](https://github.com/rg3/youtube-dl) to avoid any error.
 
 This script requires Mechanize gem to run.
