@@ -30,5 +30,5 @@ ruby stackskills_dl.rb --help
 
 For example, if you want to download only one course:
 ```ruby
-ruby stackskills_dl.rb -c https://stackskills.com/courses/java-programming-the-master-course
+ruby stackskills_dl.rb -c https://stackskills.com/courses/enrolled/68582
 ```
