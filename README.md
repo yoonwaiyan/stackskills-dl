@@ -29,6 +29,12 @@ ruby stackskills_dl.rb --help
 ```
 
 For example, if you want to download only one course:
+Using course ID:
 ```ruby
 ruby stackskills_dl.rb -c https://stackskills.com/courses/enrolled/68582
+```
+
+Using course slug:
+```ruby
+ruby stackskills_dl.rb -cs https://stackskills.com/courses/beginning-rails-programming
 ```
