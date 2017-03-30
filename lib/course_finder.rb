@@ -17,12 +17,6 @@ class CourseFinder
     @input = input
   end
 
-  def find_course(course_name)
-    puts "Finding #{course_name} from your list of courses"
-    course_href = course_name.split('/courses/').last
-    current_page.link_with(href: Regexp.new(course_href.to_s))
-  end
-
   def execute
     self.current_page = Mechanize.new.get(STACKSKILLS_LOGIN_URL)
     user_dashboard = login_user!
@@ -73,6 +67,18 @@ class CourseFinder
     lecture
   end
 
+  def find_course(course_name)
+    puts "Finding #{course_name} from your list of courses"
+    course_href = course_name.split('/courses/').last
+    course = current_page.link_with(href: Regexp.new(course_href.to_s))
+
+    if course.nil?
+      puts "Unable to find this course: #{course_name} from your list of courses."
+    end
+
+    course
+  end
+
   def get_course_links
     courses = []
 
@@ -82,7 +88,7 @@ class CourseFinder
       courses = current_page.links_with(href: %r{courses/(?!enrolled)})
     end
 
-    courses
+    courses.compact
   end
 
   def login_user!
