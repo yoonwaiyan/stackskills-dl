@@ -1,4 +1,5 @@
 require 'mechanize'
+require 'pry'
 
 class CourseFinder
 
@@ -79,11 +80,22 @@ class CourseFinder
     course
   end
 
+  def get_course_link_from_slug(url)
+    course_page = Mechanize.new.get(url)
+    form = course_page.forms.first
+    course_id = form["course_id"]
+    "https://stackskills.com/courses/enrolled/#{course_id}"
+  end
+
   def get_course_links
     courses = []
 
     if input.has_course_input?
-      courses << find_course(input.course_url)
+      course_url = input.course_url
+      unless input.course_url_is_id?
+        course_url = get_course_link_from_slug(input.course_url)
+      end
+      courses << find_course(course_url)
     else
       courses = current_page.links_with(href: %r{courses/(?!enrolled)})
     end

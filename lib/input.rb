@@ -2,7 +2,7 @@ require 'optparse'
 require 'highline/import'
 
 class Input
-  attr_accessor :email, :password, :course_url
+  attr_accessor :email, :password, :course_url, :course_url_type
 
   def self.get_input
     self.new
@@ -15,6 +15,10 @@ class Input
 
   def has_course_input?
     !course_url.nil?
+  end
+
+  def course_url_is_id?
+    course_url_type == :id
   end
 
   private
@@ -34,8 +38,13 @@ class Input
       opts.on('-p', '--password PASSWORD', 'Password') do |password|
         self.password = password
       end
-      opts.on('-c', '--course COURSE_URL', 'Course URL.') do |course_url|
+      opts.on('-c', '--course COURSE_URL', 'Course URL in ID.') do |course_url|
         self.course_url = course_url
+        self.course_url_type = :id
+      end
+      opts.on('-cs', '--course-slug COURSE_SLUG', 'Course URL in slug.') do |course_url|
+        self.course_url = course_url
+        self.course_url_type = :slug
       end
     end
   end
