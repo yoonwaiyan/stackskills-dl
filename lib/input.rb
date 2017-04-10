@@ -42,7 +42,7 @@ class Input
         self.course_url = course_url
         self.course_url_type = :id
       end
-      opts.on('-cs', '--course-slug COURSE_SLUG', 'Course URL in slug.') do |course_url|
+      opts.on('-s', '--course-slug COURSE_SLUG', 'Course URL in slug.') do |course_url|
         self.course_url = course_url
         self.course_url_type = :slug
       end
