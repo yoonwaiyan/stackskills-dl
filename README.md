@@ -36,5 +36,5 @@ ruby stackskills_dl.rb -c https://stackskills.com/courses/enrolled/68582
 
 Using course slug:
 ```ruby
-ruby stackskills_dl.rb -cs https://stackskills.com/courses/beginning-rails-programming
+ruby stackskills_dl.rb -s https://stackskills.com/courses/beginning-rails-programming
 ```
