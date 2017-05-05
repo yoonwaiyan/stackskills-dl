@@ -44,7 +44,7 @@ class Lecture
   def download_video
     case video_type
     when :attachment
-      puts `wget #{video.href} -c -O #{lecture_name}.mp4`
+      puts `wget #{video_url} -c -O #{name}.mp4`
     when :wistia
       puts `youtube-dl --restrict-filenames #{video_url}`
     else
