@@ -20,7 +20,7 @@ To use this script:
 ```ruby
 ruby stackskills_dl.rb
 ```
-This script will prompt your login details and download all courses available in your "Enrolled Courses" page.
+The script will prompt your login details and download all courses available in your "Enrolled Courses" page. Alternatively, you can save your credentials to environment variables as `STACKSKILLS_EMAIL` and `STACKSKILLS_PASSWORD` for login email and password respectively.
 
 Flags are available to pass login details and optional course link to the script.
 To see what are the available options, please type:

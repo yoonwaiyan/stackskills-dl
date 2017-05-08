@@ -10,15 +10,29 @@ class Input
 
   def initialize(args = {})
     parse_options
-    prompt_login_credentials
+    get_environment_variables
+    unless has_complete_login_input?
+      prompt_login_credentials
+    else
+      puts "Loaded login credentials from environment variables."
+    end
   end
 
   def has_course_input?
     !course_url.nil?
   end
 
+  def has_complete_login_input?
+    !email.nil? && !password.nil?
+  end
+
   def course_url_is_id?
     course_url_type == :id
+  end
+
+  def get_environment_variables
+    self.email    ||= ENV["STACKSKILLS_EMAIL"]
+    self.password ||= ENV["STACKSKILLS_PASSWORD"]
   end
 
   private
