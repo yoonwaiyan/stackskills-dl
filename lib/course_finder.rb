@@ -22,7 +22,7 @@ class CourseFinder
     self.current_page = Mechanize.new.get(STACKSKILLS_LOGIN_URL)
     user_dashboard = login_user!
 
-    return false unless user_dashboard
+    return false if user_dashboard.nil?
     self.current_page = user_dashboard
     get_course_links.each do |course_link|
       course = Course.new(url: course_link.text)
@@ -97,7 +97,7 @@ class CourseFinder
       end
       courses << find_course(course_url)
     else
-      courses = current_page.links_with(href: %r{courses/(?!enrolled)})
+      courses = current_page.links_with(href: %r{courses/enrolled/})
     end
 
     courses.compact
@@ -108,10 +108,11 @@ class CourseFinder
     form['user[email]']    = input.email
     form['user[password]'] = input.password
     page = form.submit
-    user_dashboard = page.link_with(href: %r{courses/enrolled})
-    if user_dashboard.href.end_with?("enrolled")
+    user_dashboard = page.link_with(href: %r{courses/enrolled}).click
+    signout_link = user_dashboard.link_with(href: %r{sign_out})
+    unless signout_link.nil?
       puts "Login Successfully."
-      return user_dashboard.click
+      return user_dashboard
     else
       puts "Invalid Login Credentials."
     end
