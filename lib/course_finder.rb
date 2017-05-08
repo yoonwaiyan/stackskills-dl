@@ -109,7 +109,7 @@ class CourseFinder
     form['user[password]'] = input.password
     page = form.submit
     user_dashboard = page.link_with(href: %r{courses/enrolled})
-    if user_dashboard
+    if user_dashboard.href.end_with?("enrolled")
       puts "Login Successfully."
       return user_dashboard.click
     else
