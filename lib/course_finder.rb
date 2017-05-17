@@ -19,7 +19,9 @@ class CourseFinder
   end
 
   def execute
-    self.current_page = Mechanize.new.get(STACKSKILLS_LOGIN_URL)
+    agent = Mechanize.new
+    agent.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    self.current_page = agent.get(STACKSKILLS_LOGIN_URL)
     user_dashboard = login_user!
 
     return false if user_dashboard.nil?
