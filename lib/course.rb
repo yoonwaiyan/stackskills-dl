@@ -1,9 +1,10 @@
 class Course
 
-  attr_accessor :name, :url, :lectures
+  attr_accessor :name, :url, :lectures, :course_id
 
   def initialize(args = {})
     @url  = args.fetch(:url)
+    @name = args.fetch(:name)
     @name = get_course_name
   end
 
@@ -22,7 +23,7 @@ class Course
 
   private
   def get_course_name
-    Utilities.escape_chars(url.strip.split("\n").first)
+    Utilities.escape_chars(name.strip.split("\n").first)
   end
 
 end

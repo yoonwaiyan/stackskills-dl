@@ -7,8 +7,10 @@ class CourseFinder
 
   def self.run(input)
     finder = self.new(input)
-    finder.execute do |course|
-      course.download
+    Utilities.mkchdir("downloads") do
+      finder.execute do |course|
+        course.download
+      end
     end
   end
 
@@ -27,7 +29,7 @@ class CourseFinder
     return false if user_dashboard.nil?
     self.current_page = user_dashboard
     get_course_links.each do |course_link|
-      course = Course.new(url: course_link.text)
+      course = Course.new(url: course_link.href, name: course_link.text)
       lectures = analyze_course(course_link)
       course.add_lectures(lectures)
 
