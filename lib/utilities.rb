@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class Utilities
   class << self
 
@@ -6,7 +8,7 @@ class Utilities
     end
 
     def mkchdir(dir)
-      system 'mkdir', '-p', dir
+      FileUtils.mkdir_p(dir)
       Dir.chdir(dir) do
         yield
       end
