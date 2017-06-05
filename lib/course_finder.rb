@@ -7,11 +7,13 @@ class CourseFinder
 
   def self.run(input)
     finder = self.new(input)
+
     Utilities.mkchdir("downloads") do
       finder.execute do |course|
         course.download
       end
     end
+    
   end
 
   attr_accessor :input, :current_page, :courses
@@ -28,9 +30,10 @@ class CourseFinder
 
     return false if user_dashboard.nil?
     self.current_page = user_dashboard
+    # binding.pry
     get_course_links.each do |course_link|
       course = Course.new(url: course_link.href, name: course_link.text)
-      lectures = analyze_course(course_link)
+      lectures = analyze_course(course_link, course)
       course.add_lectures(lectures)
 
       yield course
@@ -38,9 +41,21 @@ class CourseFinder
   end
 
   private
-  def analyze_course(course_link)
+  def analyze_course(course_link, course)
     processed_lectures = []
     lectures = course_link.click
+
+    # lectures.search(".course-section").each do |section|
+    #   section_title = course_section.search(".section-title").children[2].text
+
+    #   course_section = CourseSection.new(title: section_title)
+
+    #   section.search(".section-item").each do |lecture|
+    #     lecture_id = lecture.attributes["data-lecture-id"].value
+    #     course_section.add_lecture(lecture_id)
+    #   end
+    # end
+
     lectures.links_with(href: /lectures/).each_with_index do |lecture, index|
       lecture_page = lecture.click
       processed_lectures << analyze_lecture(lecture_page, index)
@@ -51,6 +66,9 @@ class CourseFinder
 
   def analyze_lecture(lecture_page, index)
     lecture = Lecture.new(name: lecture_page.title, index: index)
+
+    # TODO: link between Mechanize lecture page and Course Section
+    # binding.pry
 
     video = lecture_page.link_with(href: /.mp4/)
     if video
