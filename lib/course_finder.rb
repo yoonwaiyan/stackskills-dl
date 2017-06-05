@@ -28,7 +28,10 @@ class CourseFinder
 
     return false if user_dashboard.nil?
     self.current_page = user_dashboard
-    get_course_links.each do |course_link|
+    courses = get_course_links
+    puts "Number of courses found: #{courses.count}"
+
+    courses.each do |course_link|
       course = Course.new(url: course_link.href, name: course_link.text)
       lectures = analyze_course(course_link)
       course.add_lectures(lectures)
@@ -84,6 +87,19 @@ class CourseFinder
     course
   end
 
+  def navigate_pages(current_page, courses = [])
+    links = current_page.links_with(href: %r{courses/enrolled/})
+    courses << links
+
+    next_page_link = current_page.link_with(text: /Next/)
+    unless next_page_link.nil?
+      next_page = next_page_link.click
+      navigate_pages(next_page, courses)
+    else
+      return courses.flatten
+    end
+  end
+
   def get_course_link_from_slug(url)
     course_page = Mechanize.new.get(url)
     form = course_page.forms.first
@@ -101,10 +117,10 @@ class CourseFinder
       end
       courses << find_course(course_url)
     else
-      courses = current_page.links_with(href: %r{courses/enrolled/})
+      courses << navigate_pages(current_page)
     end
 
-    courses.compact
+    courses.flatten.compact
   end
 
   def login_user!
