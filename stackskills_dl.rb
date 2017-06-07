@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require './lib/input'
 require './lib/course_finder'
 require './lib/course'
