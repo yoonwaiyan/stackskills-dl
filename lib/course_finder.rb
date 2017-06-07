@@ -7,11 +7,13 @@ class CourseFinder
 
   def self.run(input)
     finder = self.new(input)
+
     Utilities.mkchdir("downloads") do
       finder.execute do |course|
         course.download
       end
     end
+    
   end
 
   attr_accessor :input, :current_page, :courses
@@ -21,9 +23,9 @@ class CourseFinder
   end
 
   def execute
-    agent = Mechanize.new
-    agent.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    self.current_page = agent.get(STACKSKILLS_LOGIN_URL)
+    @agent = Mechanize.new
+    @agent.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    self.current_page = @agent.get(STACKSKILLS_LOGIN_URL)
     user_dashboard = login_user!
 
     return false if user_dashboard.nil?
@@ -33,7 +35,7 @@ class CourseFinder
 
     courses.each do |course_link|
       course = Course.new(url: course_link.href, name: course_link.text)
-      lectures = analyze_course(course_link)
+      lectures = analyze_course(course_link, course)
       course.add_lectures(lectures)
 
       yield course
@@ -41,12 +43,24 @@ class CourseFinder
   end
 
   private
-  def analyze_course(course_link)
+  def analyze_course(course_link, course)
     processed_lectures = []
     lectures = course_link.click
-    lectures.links_with(href: /lectures/).each_with_index do |lecture, index|
-      lecture_page = lecture.click
-      processed_lectures << analyze_lecture(lecture_page, index)
+
+    lectures.search(".course-section").each_with_index do |section, section_index|
+      section_title = section.search(".section-title").children[2].text
+
+      course_section = CourseSection.new(name: section_title, index: section_index)
+
+      section.search(".section-item").each do |lecture|
+        href = lecture.children[1]
+        lecture_page = @agent.click(href)
+
+        lecture = analyze_lecture(lecture_page, processed_lectures.count)
+        lecture.add_section(course_section)
+
+        processed_lectures << lecture
+      end
     end
 
     processed_lectures
