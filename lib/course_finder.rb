@@ -23,9 +23,9 @@ class CourseFinder
   end
 
   def execute
-    agent = Mechanize.new
-    agent.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    self.current_page = agent.get(STACKSKILLS_LOGIN_URL)
+    @agent = Mechanize.new
+    @agent.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    self.current_page = @agent.get(STACKSKILLS_LOGIN_URL)
     user_dashboard = login_user!
 
     return false if user_dashboard.nil?
@@ -45,20 +45,20 @@ class CourseFinder
     processed_lectures = []
     lectures = course_link.click
 
-    # lectures.search(".course-section").each do |section|
-    #   section_title = course_section.search(".section-title").children[2].text
+    lectures.search(".course-section").each_with_index do |section, section_index|
+      section_title = section.search(".section-title").children[2].text
 
-    #   course_section = CourseSection.new(title: section_title)
+      course_section = CourseSection.new(name: section_title, index: section_index)
 
-    #   section.search(".section-item").each do |lecture|
-    #     lecture_id = lecture.attributes["data-lecture-id"].value
-    #     course_section.add_lecture(lecture_id)
-    #   end
-    # end
+      section.search(".section-item").each do |lecture|
+        href = lecture.children[1]
+        lecture_page = @agent.click(href)
 
-    lectures.links_with(href: /lectures/).each_with_index do |lecture, index|
-      lecture_page = lecture.click
-      processed_lectures << analyze_lecture(lecture_page, index)
+        lecture = analyze_lecture(lecture_page, processed_lectures.count)
+        lecture.add_section(course_section)
+
+        processed_lectures << lecture
+      end
     end
 
     processed_lectures
@@ -66,9 +66,6 @@ class CourseFinder
 
   def analyze_lecture(lecture_page, index)
     lecture = Lecture.new(name: lecture_page.title, index: index)
-
-    # TODO: link between Mechanize lecture page and Course Section
-    # binding.pry
 
     video = lecture_page.link_with(href: /.mp4/)
     if video

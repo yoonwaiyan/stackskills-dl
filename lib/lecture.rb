@@ -1,6 +1,6 @@
 class Lecture
 
-  attr_accessor :name, :video_url, :video_type, :pdf, :zipf, :index
+  attr_accessor :name, :section, :video_url, :video_type, :pdf, :zipf, :index
 
   def initialize(args = {})
     @name  = args.fetch(:name)
@@ -27,9 +27,13 @@ class Lecture
     self.zipf = zip_url
   end
 
+  def add_section(section)
+    self.section = section
+  end
+
   def download
     puts "Downloading #{name}"
-    Utilities.mkchdir("%02d" % index + ". #{name}") do
+    Utilities.mkchdir("#{section.directory_name}/#{directory_name}") do
       download_video
       download_pdf
       download_zip
@@ -37,6 +41,10 @@ class Lecture
   end
 
   private
+  def directory_name
+    "%02d" % index + ". #{name}"
+  end
+
   def sanitize_lecture_name
     self.name = Utilities.escape_chars(name.split(' | StackSkills').first)
   end

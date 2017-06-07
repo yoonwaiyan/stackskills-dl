@@ -1,15 +1,20 @@
 class Course
 
-  attr_accessor :name, :url, :lectures, :course_id
+  attr_accessor :name, :url, :lectures, :course_id, :sections
 
   def initialize(args = {})
     @url  = args.fetch(:url)
     @name = args.fetch(:name)
     @name = get_course_name
+    @sections = []
   end
 
   def add_lectures(lectures)
     self.lectures = lectures
+  end
+
+  def add_section(section)
+    self.sections << section
   end
 
   def download
