@@ -40,3 +40,6 @@ Using course slug:
 ```ruby
 ruby stackskills_dl.rb -s https://stackskills.com/courses/beginning-rails-programming
 ```
+
+## Change Log
+Change log is available in CHANGELOG.md.
