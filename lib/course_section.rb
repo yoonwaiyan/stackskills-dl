@@ -15,6 +15,6 @@ class CourseSection
 
   private
   def sanitize_section_name!
-    @name = @name.strip
+    @name = Utilities.escape_chars(@name.strip)
   end
 end
