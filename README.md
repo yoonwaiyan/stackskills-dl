@@ -1,17 +1,19 @@
 This is a **non-official** Ruby script to download all StackSkills tutorials. Login details is required to acquire the subscribed courses to be downloaded.
 
-## Usage
-**Pre-requisites (Important!!)**
+## Information
+### Pre-requisites (Important!!)
 - wget - download attached files(videos, PDFs and zipped files).
 - youtube-dl - for Wistia videos, please install [youtube-dl](https://github.com/rg3/youtube-dl) to avoid any error.
 
-#### For Non-Ruby Downloaders
+### For Non-Ruby Downloaders
 If this is the first time you're running a Ruby script, it is recommended to install Ruby via a version manager i.e. rvm or rbenv, but installing Ruby directly is fine for a short term usage to make sure the script is compatible with the current Ruby version.
 
-#### For Windows Users
+### For Windows Users
 The script may not be working well with Windows systems based on some issues being reported. If you're familiar with command prompt/Linux based commands and have Git installed, please try to use Git bash to run the script.
 
-------
+If you're facing problems related to wget, do make sure wget can be run within your working directory i.e. directory that runs this script.
+
+## Usage
 
 This script requires Mechanize gem to run.
 ```ruby

@@ -9,3 +9,18 @@ require './lib/utilities'
 
 input = Input.get_input
 CourseFinder.run(input)
+
+trap('INT') do
+  puts "Exiting..."
+  exit!
+end
+
+trap('SIGINT') do
+  puts "SIGINT"
+  exit!
+end
+
+trap('TERM') do
+  puts "TERMINAL"
+  exit!
+end
