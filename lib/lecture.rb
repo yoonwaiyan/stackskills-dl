@@ -52,9 +52,19 @@ class Lecture
   def download_video
     case video_type
     when :attachment
-      puts `wget #{video_url} -c -O #{name}.mp4 --no-check-certificate`
+      system(
+        "wget",
+        video_url,
+        "-c",
+        "-O",  "#{name}.mp4",
+        "--no-check-certificate"
+      )
     when :wistia
-      puts `youtube-dl --restrict-filenames #{video_url}`
+      system(
+        "youtube-dl",
+        "--restrict-filenames",
+        video_url
+      )
     else
       puts "Sorry, this lecture is not available to download"
     end
@@ -62,11 +72,23 @@ class Lecture
 
   def download_pdf
     return nil unless pdf
-    `wget #{pdf.href} -c -O #{pdf.text.split(' ').first} --no-check-certificate`
+    system(
+      "wget",
+      pdf.href,
+      "-c",
+      "-O", pdf.text.split(" ").first,
+      "--no-check-certificate"
+    )
   end
 
   def download_zip
     return nil unless zipf
-    `wget #{zipf.href} -c -O #{zipf.text.split(' ').first} --no-check-certificate`
+    system(
+      "wget",
+      zipf.href,
+      "-c",
+      "-O", zipf.text.split(" ").first,
+      "--no-check-certificate"
+    )
   end
 end
