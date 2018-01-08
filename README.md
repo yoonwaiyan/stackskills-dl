@@ -1,5 +1,16 @@
 # stackskills-dl
 
+<!-- MarkdownTOC -->
+
+- Information
+- Usage
+	- Pre-requisites \(Important!!\)
+	- For Non-Ruby Downloaders
+	- For Windows Users
+- Change Log
+
+<!-- /MarkdownTOC -->
+
 ## Information
 
 Being inspired by some popular downloader libraries(youtube-dl, udemy-dl etc.) and no downloader library available for StackSkills(or SkillWise) courses, I've decided to put on this small scraping library to help you download the courses to your machine for offline viewing and take it as part of my Ruby learning and contributing to open source community.
