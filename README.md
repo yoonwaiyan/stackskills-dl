@@ -1,16 +1,17 @@
 # stackskills-dl
 
-<!-- MarkdownTOC -->
+<!-- MarkdownTOC autolink="true" autoanchor="true" bracket="round" -->
 
-- Information
-- Usage
-	- Pre-requisites \(Important!!\)
-	- For Non-Ruby Downloaders
-	- For Windows Users
-- Change Log
+- [Information](#information)
+- [Usage](#usage)
+	- [Pre-requisites \(Important!!\)](#pre-requisites-important)
+	- [For Non-Ruby Downloaders](#for-non-ruby-downloaders)
+	- [For Windows Users](#for-windows-users)
+- [Change Log](#change-log)
 
 <!-- /MarkdownTOC -->
 
+<a name="information"></a>
 ## Information
 
 Being inspired by some popular downloader libraries(youtube-dl, udemy-dl etc.) and no downloader library available for StackSkills(or SkillWise) courses, I've decided to put on this small scraping library to help you download the courses to your machine for offline viewing and take it as part of my Ruby learning and contributing to open source community.
@@ -19,17 +20,21 @@ This library will by default get all your subscribed courses and download them a
 
 :exclamation:This is a **non-official** Ruby script to download all StackSkills tutorials. Login details is required to get your subscribed courses to be downloaded.:exclamation:
 
+<a name="usage"></a>
 ## Usage
 
+<a name="pre-requisites-important"></a>
 #### Pre-requisites (Important!!)
 
 1. wget (installing guide for macOS system in [Stack Overflow](https://stackoverflow.com/questions/33886917/how-to-install-wget-in-macos-capitan-sierra)) to download file attachments(videos, PDFs and zipped files).
 2. [youtube-dl](https://github.com/rg3/youtube-dl) for Wistia videos.
 
+<a name="for-non-ruby-downloaders"></a>
 #### For Non-Ruby Downloaders
 
 If this is the first time you're running a Ruby script, it is recommended to install Ruby via a version manager i.e. rvm or rbenv, but installing Ruby directly is fine for a short term usage to make sure the script is compatible with the current Ruby version.
 
+<a name="for-windows-users"></a>
 #### For Windows Users
 
 The script may not be working well with Windows systems based on some issues being reported. If you're familiar with command prompt/Linux based commands and have Git installed, please try to use Git bash to run the script.
@@ -71,6 +76,7 @@ ruby stackskills_dl.rb -c https://stackskills.com/courses/enrolled/68582
 ruby stackskills_dl.rb -s https://stackskills.com/courses/beginning-rails-programming
 ```
 
+<a name="change-log"></a>
 ## Change Log
 
 Change log is available in CHANGELOG.md.
