@@ -43,6 +43,70 @@ class CourseFinder
   end
 
   private
+
+  def login_user!
+    form = current_page.forms.first
+    form['user[email]']    = input.email
+    form['user[password]'] = input.password
+    page = form.submit
+    user_dashboard = page.link_with(href: %r{courses/enrolled}).click
+    signout_link = user_dashboard.link_with(href: %r{sign_out})
+    unless signout_link.nil?
+      puts "Login Successfully."
+      return user_dashboard
+    else
+      puts "Invalid Login Credentials."
+    end
+  end
+
+  def get_course_links
+    if input.has_course_input?
+      course_url = input.course_url
+      unless input.course_url_is_id?
+        course_url = get_course_link_from_slug(input.course_url)
+      end
+      courses = [find_course(course_url)]
+    else
+      all_courses
+    end
+  end
+
+  def get_course_link_from_slug(url)
+    course_page = Mechanize.new.get(url)
+    form = course_page.forms.first
+    course_id = form["course_id"]
+    "https://stackskills.com/courses/enrolled/#{course_id}"
+  end
+
+  def find_course(course_name)
+    puts "Finding #{course_name} from your list of courses"
+    course_href = course_name.split('/courses/').last
+    course = all_courses.select { |course| course.href =~ Regexp.new(course_href.to_s) }.first
+
+    if course.nil?
+      puts "Unable to find this course: #{course_name} from your list of courses."
+    end
+
+    course
+  end
+
+  def all_courses
+    @courses ||= navigate_pages(current_page).flatten.compact
+  end
+
+  def navigate_pages(current_page, courses = [])
+    links = current_page.links_with(href: %r{courses/enrolled/})
+    courses << links
+
+    next_page_link = current_page.link_with(text: /Next/)
+    unless next_page_link.nil?
+      next_page = next_page_link.click
+      navigate_pages(next_page, courses)
+    else
+      return courses.flatten
+    end
+  end
+
   def analyze_course(course_link, course)
     processed_lectures = []
     lectures = course_link.click
@@ -89,66 +153,4 @@ class CourseFinder
     lecture
   end
 
-  def find_course(course_name)
-    puts "Finding #{course_name} from your list of courses"
-    course_href = course_name.split('/courses/').last
-    course = all_courses.select { |course| course.href =~ Regexp.new(course_href.to_s) }.first
-
-    if course.blank?
-      puts "Unable to find this course: #{course_name} from your list of courses."
-    end
-
-    course
-  end
-
-  def navigate_pages(current_page, courses = [])
-    links = current_page.links_with(href: %r{courses/enrolled/})
-    courses << links
-
-    next_page_link = current_page.link_with(text: /Next/)
-    unless next_page_link.nil?
-      next_page = next_page_link.click
-      navigate_pages(next_page, courses)
-    else
-      return courses.flatten
-    end
-  end
-
-  def get_course_link_from_slug(url)
-    course_page = Mechanize.new.get(url)
-    form = course_page.forms.first
-    course_id = form["course_id"]
-    "https://stackskills.com/courses/enrolled/#{course_id}"
-  end
-
-  def all_courses
-    @courses ||= navigate_pages(current_page).flatten.compact
-  end
-
-  def get_course_links
-    if input.has_course_input?
-      course_url = input.course_url
-      unless input.course_url_is_id?
-        course_url = get_course_link_from_slug(input.course_url)
-      end
-      courses = [find_course(course_url)]
-    else
-      all_courses
-    end
-  end
-
-  def login_user!
-    form = current_page.forms.first
-    form['user[email]']    = input.email
-    form['user[password]'] = input.password
-    page = form.submit
-    user_dashboard = page.link_with(href: %r{courses/enrolled}).click
-    signout_link = user_dashboard.link_with(href: %r{sign_out})
-    unless signout_link.nil?
-      puts "Login Successfully."
-      return user_dashboard
-    else
-      puts "Invalid Login Credentials."
-    end
-  end
 end
