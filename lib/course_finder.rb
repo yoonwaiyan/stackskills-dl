@@ -92,9 +92,9 @@ class CourseFinder
   def find_course(course_name)
     puts "Finding #{course_name} from your list of courses"
     course_href = course_name.split('/courses/').last
-    course = current_page.link_with(href: Regexp.new(course_href.to_s))
+    course = all_courses.select { |course| course.href =~ Regexp.new(course_href.to_s) }.first
 
-    if course.nil?
+    if course.blank?
       puts "Unable to find this course: #{course_name} from your list of courses."
     end
 
@@ -121,20 +121,20 @@ class CourseFinder
     "https://stackskills.com/courses/enrolled/#{course_id}"
   end
 
-  def get_course_links
-    courses = []
+  def all_courses
+    @courses ||= navigate_pages(current_page).flatten.compact
+  end
 
+  def get_course_links
     if input.has_course_input?
       course_url = input.course_url
       unless input.course_url_is_id?
         course_url = get_course_link_from_slug(input.course_url)
       end
-      courses << find_course(course_url)
+      courses = [find_course(course_url)]
     else
-      courses << navigate_pages(current_page)
+      all_courses
     end
-
-    courses.flatten.compact
   end
 
   def login_user!
