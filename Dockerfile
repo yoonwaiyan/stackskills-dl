@@ -1,5 +1,11 @@
 FROM ruby:2.4.4-alpine3.7
 
+ARG STACKSKILLS_EMAIL
+ARG STACKSKILLS_PASSWORD
+
+ENV STACKSKILLS_EMAIL ${STACKSKILLS_EMAIL}
+ENV STACKSKILLS_PASSWORD ${STACKSKILLS_PASSWORD}
+
 RUN apk update && apk upgrade
 RUN apk add --no-cache git vim build-base wget
 RUN set -x \
