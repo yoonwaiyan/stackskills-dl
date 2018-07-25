@@ -34,7 +34,7 @@ To run this script using Docker, you can use both `docker-compose` or run the im
 
 Using docker-compose:
 
-1.  Copy `docker-compose.yml.example` to `docker-compose.yml.example`. For example:
+1.  Copy `docker-compose.yml.example` to `docker-compose.yml`. For example:
 
 ```shell
 $ cp docker-compose.yml.example docker-compose.yml
