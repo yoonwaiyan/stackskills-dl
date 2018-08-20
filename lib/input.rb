@@ -23,7 +23,7 @@ class Input
   end
 
   def has_complete_login_input?
-    !email.nil? && !password.nil?
+    email.length > 0 && password.length > 0
   end
 
   def course_url_is_id?
@@ -31,14 +31,14 @@ class Input
   end
 
   def get_environment_variables
-    self.email    ||= ENV["STACKSKILLS_EMAIL"]
-    self.password ||= ENV["STACKSKILLS_PASSWORD"]
+    self.email    = ENV["STACKSKILLS_EMAIL"]
+    self.password = ENV["STACKSKILLS_PASSWORD"]
   end
 
   private
   def prompt_login_credentials
-    self.email    ||= ask('Login Email: ')
-    self.password ||= ask('Login password: ') { |q| q.echo = '*' }
+    self.email    = ask('Login Email: ')
+    self.password = ask('Login password: ') { |q| q.echo = '*' }
   end
 
   def options_structure
