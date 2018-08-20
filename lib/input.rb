@@ -23,7 +23,15 @@ class Input
   end
 
   def has_complete_login_input?
-    email.length > 0 && password.length > 0
+     has_email? && has_password?
+  end
+
+  def has_email?
+    !email.nil? && email.length > 0
+  end
+
+  def has_password?
+    !password.nil? && password.length > 0
   end
 
   def course_url_is_id?

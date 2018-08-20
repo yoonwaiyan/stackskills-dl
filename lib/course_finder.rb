@@ -65,7 +65,7 @@ class CourseFinder
       unless input.course_url_is_id?
         course_url = get_course_link_from_slug(input.course_url)
       end
-      courses = [find_course(course_url)]
+      courses = [find_course(course_url)].compact
     else
       all_courses
     end
