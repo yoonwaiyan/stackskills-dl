@@ -98,7 +98,7 @@ class CourseFinder
     links = current_page.links_with(href: %r{courses/enrolled/})
     courses << links
 
-    next_page_link = current_page.link_with(text: /Next/)
+    next_page_link = current_page.link_with(text: /Next/, href: %r{courses/enrolled\?page=})
     unless next_page_link.nil?
       next_page = next_page_link.click
       navigate_pages(next_page, courses)
