@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
 .article {
-  width: 940px;
+  width: 840px;
   margin: 0 auto;
+  padding: 0px 5px;
+
+  font-family: 'Muli', Sans;
+}
+
+.article p {
+  line-height: 1.7em;
 }
 
 .article h1 {
