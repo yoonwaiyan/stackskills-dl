@@ -49,9 +49,9 @@ class CourseFinder
     form['user[email]']    = input.email
     form['user[password]'] = input.password
     page = form.submit
-    user_dashboard = page.link_with(href: %r{courses/enrolled}).click
     signout_link = user_dashboard.link_with(href: %r{sign_out})
     unless signout_link.nil?
+      user_dashboard = page.link_with(href: %r{courses/enrolled}).click
       puts "Login Successfully."
       return user_dashboard
     else
@@ -132,7 +132,7 @@ class CourseFinder
 
   def analyze_lecture(lecture_page, index)
     lecture = Lecture.new(name: lecture_page.title, index: index)
-
+    
     video = lecture_page.link_with(href: /.mp4/)
     if video
       lecture.add_video_attachment(video.href)
