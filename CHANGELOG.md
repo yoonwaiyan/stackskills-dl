@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## Nov 12, 2018
+- [BUG] https://github.com/yoonwaiyan/stackskills-dl/commit/efd45829aa53e5b5947611953f1f9db14f35f40f
+
 ## July 24, 2018
 - [FEATURE] Dockerized this script!
 
