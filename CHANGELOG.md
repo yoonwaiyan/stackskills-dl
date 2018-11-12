@@ -1,7 +1,6 @@
 # Change Log
 
-## [Unreleased](https://github.com/yoonwaiyan/stackskills-dl/tree/HEAD)
-
+## [v0.3.2](https://github.com/yoonwaiyan/stackskills-dl/tree/v0.3.2) (2018-11-12)
 **Implemented enhancements:**
 
 - Manage Course Content by Course Sections [\#21](https://github.com/yoonwaiyan/stackskills-dl/issues/21)
