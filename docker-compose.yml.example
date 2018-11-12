@@ -7,6 +7,7 @@ services:
         STACKSKILLS_EMAIL: email@example.com
         STACKSKILLS_PASSWORD: password
     command: ruby stackskills_dl.rb
+    network_mode: host
     volumes:
       - .:/usr/app
       - $PWD/downloads:/usr/app/downloads

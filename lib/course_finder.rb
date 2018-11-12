@@ -49,10 +49,10 @@ class CourseFinder
     form['user[email]']    = input.email
     form['user[password]'] = input.password
     page = form.submit
-    signout_link = user_dashboard.link_with(href: %r{sign_out})
-    unless signout_link.nil?
-      user_dashboard = page.link_with(href: %r{courses/enrolled}).click
+    enrolled_courses_link = page.link_with(href: %r{courses/enrolled})
+    unless enrolled_courses_link.nil?
       puts "Login Successfully."
+      user_dashboard = enrolled_courses_link.click
       return user_dashboard
     else
       puts "Invalid Login Credentials."
