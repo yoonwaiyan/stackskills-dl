@@ -25,4 +25,4 @@ Check out the [wiki](https://github.com/yoonwaiyan/stackskills-dl/wiki) page to 
 <a id="change-log"></a>
 ## Change Log
 
-Change log is available in CHANGELOG.md.
+Change log is available in [CHANGELOG.md](https://github.com/yoonwaiyan/stackskills-dl/blob/master/CHANGELOG.md).
