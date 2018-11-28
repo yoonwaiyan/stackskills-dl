@@ -28,7 +28,7 @@ class Course
 
   private
   def get_course_name
-    Utilities.escape_chars(name.strip.split("\n").first)
+    Utilities.escape_chars(name.gsub("Enrolled", "").strip.split("\n").first)
   end
 
 end
