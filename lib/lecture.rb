@@ -61,7 +61,7 @@ class Lecture
         "wget",
         video_url,
         "-c",
-        "-O",  "#{name}.avi",
+        "-O",  "#{name}.mp4",
         "--no-check-certificate"
       )
     when :wistia
