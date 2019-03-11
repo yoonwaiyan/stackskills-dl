@@ -1,6 +1,6 @@
 class Lecture
 
-  attr_accessor :name, :section, :video_url, :video_type, :pdf, :zipf, :index
+  attr_accessor :name, :section, :video_url, :video_type, :pdf, :zipf, :txt, :index
 
   def initialize(args = {})
     @name  = args.fetch(:name)
@@ -27,6 +27,10 @@ class Lecture
     self.zipf = zip_url
   end
 
+  def add_text(text_url)
+    self.txt = text_url
+  end
+
   def add_section(section)
     self.section = section
   end
@@ -37,6 +41,7 @@ class Lecture
       download_video
       download_pdf
       download_zip
+      download_text
     end
   end
 
@@ -88,6 +93,17 @@ class Lecture
       zipf.href,
       "-c",
       "-O", zipf.text.split(" ").first,
+      "--no-check-certificate"
+    )
+  end
+
+  def download_text
+    return nil unless txt
+    system(
+      "wget",
+      txt.href,
+      "-c",
+      "-O", txt.text.split(" ").first,
       "--no-check-certificate"
     )
   end
