@@ -22,7 +22,7 @@ GEM
     mini_portile2 (2.4.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     ntlm-http (0.1.1)
     parallel (1.12.0)
