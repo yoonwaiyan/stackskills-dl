@@ -16,6 +16,8 @@ RUN apk add --no-cache git vim build-base wget
 # https://github.com/rg3/youtube-dl
 RUN set -x \
   && apk add --no-cache ca-certificates curl ffmpeg python gnupg \
+  && curl --remote-name --time-cond cacert.pem https://curl.haxx.se/ca/cacert.pem \
+  && export SSL_CERT_FILE=cacert.pem \
   && curl -Lo /usr/local/bin/youtube-dl https://yt-dl.org/downloads/latest/youtube-dl \
   && curl -Lo youtube-dl.sig https://yt-dl.org/downloads/latest/youtube-dl.sig \
   && gpg --keyserver keyserver.ubuntu.com --recv-keys '7D33D762FD6C35130481347FDB4B54CBA4826A18' \
@@ -30,8 +32,6 @@ RUN set -x \
   && chmod a+rw /downloads \
   # Basic check it works.
   && youtube-dl --version
-
-ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 # Setup working directory and add downloads folder
 RUN mkdir /usr/app
