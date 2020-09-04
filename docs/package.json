@@ -5,7 +5,7 @@
   "homepage": "https://yoonwaiyan.github.io/stackskills-dl",
   "dependencies": {
     "gh-pages": "^2.0.0",
-    "marked": "^0.6.1",
+    "marked": "^0.7.0",
     "prettier": "^1.14.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
