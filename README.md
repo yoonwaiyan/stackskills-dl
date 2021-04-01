@@ -1,10 +1,11 @@
-# !!!!!!!!!!!!!!!!!!!!!!!!NOT MAINTAINED
+🚨NOT MAINTAINED🚨
+
+This script has not been maintained for some time due to personal reasons and I don't actively use StackSkills. Since they has tightened up their security access and using cookies doesn't seem to work for me, I'm putting off the maintenance of this for good.
 
 # stackskills-dl
 
 <!-- MarkdownTOC autolink="true" autoanchor="true" bracket="round" -->
 
-- [!!!!!!!!!!!!!!!!!!!!!!!!NOT MAINTAINED](#not-maintained)
 - [stackskills-dl](#stackskills-dl)
   - [Information](#information)
   - [Usage](#usage)
